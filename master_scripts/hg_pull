@@ -1,0 +1,35 @@
+#!/home/buildbot/bin/python
+
+"""
+Launch an update, by guessing an HTTP URL or if standard [paths] is missing.
+
+In a buildbot master context, the pull will trigger PBChangeSource through
+the changegroup hook, for instance defined in buildbot user's .hgrc.
+
+For the guessings, the script expects to sit at the root of a structure such as
+this: 
+<HTTP-SERVER>/PATH where path is also the path part of reference repo URL. 
+This is useful for mirrors created by a simple copy/rsync operation.
+"""
+
+import os
+import sys
+from datetime import datetime
+path = sys.argv[1]
+if path.endswith('/.hg'):
+    path = path[:-4]
+
+launchdir = os.path.split(__file__)[0]
+assert path.startswith(launchdir + '/')
+rpath = path[len(launchdir)+1:]
+
+os.chdir(path)
+print datetime.now().isoformat()
+
+hgrc = os.path.join('.hg', 'hgrc')
+if os.path.isfile(hgrc) and '[paths]' in open(hgrc).read():
+  repo_url = ''
+else:
+  repo_url = "http://" + rpath
+
+os.system("/home/buildbot/bin/hg pull " + repo_url  + " > /dev/null")

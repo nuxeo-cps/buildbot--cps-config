@@ -1,0 +1,6 @@
+#!/bin/bash
+# put this at the root of your mirrors directory and launch it periodically
+# to trigger builds
+# See hg_pull for details about expected structure
+from=`dirname $0`
+find $from -type d -name '.hg' -exec $from/hg_pull {} \;
