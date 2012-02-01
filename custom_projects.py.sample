@@ -1,0 +1,23 @@
+SCHEDULERS = [] # your custom scheduler objects
+
+# Correspondence from schedulers to builders
+# In the example below, a change in cps35-base
+# will trigger the project1 builder
+
+SCHED_BUILDS = {
+    'cps35-base': ('project1', 'project2')
+    'project1': ('project1',)
+}
+
+BUILDERS = (
+    dict(bundle_url='ssh://my.hg.example/project1',
+         branch='default', # required
+         name='project1', # same as in sched2build
+         cps_version='3.5', # optional, defaults to 3.6
+         zope_version='2.9', # optional, defaults to cpsmkdevinstance default
+         ),
+)
+
+SLAVES = { # correspondence slave -> the builders it runs
+    'slave1' : ['project1',],
+    }
