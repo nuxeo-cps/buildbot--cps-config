@@ -9,6 +9,8 @@ Install buildbot-buildslave in the standard way.
 
 The buildslave must be able to create and update its testing instances in a
 complete autonomous way, by issuing commands sent by the master.
+You also need the needed test dependencies for XHTML and CSS validation.
+TODO expand on that 
 
 With official packages
 ----------------------
