@@ -1,3 +1,4 @@
+from buildbot_utils import BundleChangeFilter
 SCHEDULERS = [] # your custom scheduler objects
 
 # Correspondence from schedulers to builders
