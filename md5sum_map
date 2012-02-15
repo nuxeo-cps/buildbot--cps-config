@@ -1,0 +1,7 @@
+#!/bin/sh
+# cannot easily done in ShellCommand (redirections...)
+
+dir=$1
+for x in `ls $dir`; do
+   md5sum $dir/$x > $x.md5
+done
