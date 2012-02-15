@@ -3,5 +3,5 @@
 
 dir=$1
 for x in `ls $dir`; do
-   md5sum $dir/$x > $x.md5
+   md5sum $dir/$x > $dir/$x.md5
 done
